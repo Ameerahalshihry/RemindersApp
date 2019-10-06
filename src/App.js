@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { add_reminder, delete_reminder } from '../src/actions/index'
+import { add_reminder, delete_reminder, clear_reminders } from '../src/actions/index'
 import './App.css';
 
 class App extends Component {
@@ -59,7 +59,8 @@ class App extends Component {
           </button>
           {this.render_Reminders()}
           <button
-          className="btn btn-danger btn-block">
+          className="btn btn-danger btn-block"
+          onClick={() => this.props.clear_reminders()}>
           Clear Reminder
           </button>
       </div>
@@ -88,4 +89,4 @@ export default connect (state => {
   return {
     reminders : state
   }
-},{add_reminder, delete_reminder} )(App);
+},{add_reminder, delete_reminder, clear_reminders} )(App);

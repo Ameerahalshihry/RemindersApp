@@ -1,4 +1,4 @@
-import {ADD_REMINDER} from '../types'
+import {ADD_REMINDER, CLEAR_REMINDERS} from '../types'
 import {DELETE_REMINDER} from '../types'
 
 export const add_reminder = (text, date) =>{
@@ -21,4 +21,14 @@ export const delete_reminder = (id) => {
     console.log("Remove" + action);
     return action
     
+}
+
+export const clear_reminders = () =>{
+
+    const action={
+        type: CLEAR_REMINDERS
+    }
+console.log("CLEAR"+ action);
+return action
+
 }
