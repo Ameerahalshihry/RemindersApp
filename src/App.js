@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { add_reminder } from '../src/actions/index'
+import { add_reminder, delete_reminder } from '../src/actions/index'
 import './App.css';
 
 class App extends Component {
@@ -19,6 +19,7 @@ class App extends Component {
             <li key={reminder.id} className='list-group-item'>
             <div>{reminder.text}</div>
             <div>{reminder.date}</div>
+            <div className='btn btn-danger' onClick={() => this.props.delete_reminder(reminder.id)}>X</div>
             </li>)
           
           })}
@@ -39,17 +40,21 @@ class App extends Component {
         <input 
             className="form-control"
             type='text'
+            value={this.state.text}
             placeholder='Enter What U Think..'
             onChange={(e) => this.setState({text : e.target.value})}
         />
         <input
           className="form-control"
           type='datetime-local'
+          value={this.state.date}
           onChange={(e) => this.setState({date : e.target.value})}
         />
         <button
           className="btn btn-primary btn-block"
-          onClick={() => this.props.add_reminder(this.state.text, this.state.date)}>
+          onClick={() =>
+            {this.props.add_reminder(this.state.text, this.state.date)
+            this.setState({text:'', date:''})}}>
           Add Reminder
           </button>
           {this.render_Reminders()}
@@ -83,4 +88,4 @@ export default connect (state => {
   return {
     reminders : state
   }
-},{add_reminder} )(App);
+},{add_reminder, delete_reminder} )(App);
